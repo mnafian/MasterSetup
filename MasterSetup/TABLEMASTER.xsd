@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="UHADIR" msprop:Generator_TableClassName="UHADIRDataTable" msprop:Generator_TableVarName="tableUHADIR" msprop:Generator_RowChangedName="UHADIRRowChanged" msprop:Generator_TablePropName="UHADIR" msprop:Generator_RowDeletingName="UHADIRRowDeleting" msprop:Generator_RowChangingName="UHADIRRowChanging" msprop:Generator_RowEvHandlerName="UHADIRRowChangeEventHandler" msprop:Generator_RowDeletedName="UHADIRRowDeleted" msprop:Generator_RowClassName="UHADIRRow" msprop:Generator_UserTableName="UHADIR" msprop:Generator_RowEvArgName="UHADIRRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NO_URUT" msprop:Generator_ColumnVarNameInTable="columnNO_URUT" msprop:Generator_ColumnPropNameInRow="NO_URUT" msprop:Generator_ColumnPropNameInTable="NO_URUTColumn" msprop:Generator_UserColumnName="NO_URUT" type="xs:string" minOccurs="0" />
+              <xs:element name="TGL" msprop:Generator_ColumnVarNameInTable="columnTGL" msprop:Generator_ColumnPropNameInRow="TGL" msprop:Generator_ColumnPropNameInTable="TGLColumn" msprop:Generator_UserColumnName="TGL" type="xs:string" minOccurs="0" />
+              <xs:element name="NILAI" msprop:Generator_ColumnVarNameInTable="columnNILAI" msprop:Generator_ColumnPropNameInRow="NILAI" msprop:Generator_ColumnPropNameInTable="NILAIColumn" msprop:Generator_UserColumnName="NILAI" type="xs:string" minOccurs="0" />
+              <xs:element name="STATUS" msprop:Generator_ColumnVarNameInTable="columnSTATUS" msprop:Generator_ColumnPropNameInRow="STATUS" msprop:Generator_ColumnPropNameInTable="STATUSColumn" msprop:Generator_UserColumnName="STATUS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OTO_GAJI" msprop:Generator_TableClassName="OTO_GAJIDataTable" msprop:Generator_TableVarName="tableOTO_GAJI" msprop:Generator_RowChangedName="OTO_GAJIRowChanged" msprop:Generator_TablePropName="OTO_GAJI" msprop:Generator_RowDeletingName="OTO_GAJIRowDeleting" msprop:Generator_RowChangingName="OTO_GAJIRowChanging" msprop:Generator_RowEvHandlerName="OTO_GAJIRowChangeEventHandler" msprop:Generator_RowDeletedName="OTO_GAJIRowDeleted" msprop:Generator_RowClassName="OTO_GAJIRow" msprop:Generator_UserTableName="OTO_GAJI" msprop:Generator_RowEvArgName="OTO_GAJIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NO_URUT" msprop:Generator_ColumnVarNameInTable="columnNO_URUT" msprop:Generator_ColumnPropNameInRow="NO_URUT" msprop:Generator_ColumnPropNameInTable="NO_URUTColumn" msprop:Generator_UserColumnName="NO_URUT" type="xs:string" minOccurs="0" />
+              <xs:element name="NAMA_PEMBUAT" msprop:Generator_ColumnVarNameInTable="columnNAMA_PEMBUAT" msprop:Generator_ColumnPropNameInRow="NAMA_PEMBUAT" msprop:Generator_ColumnPropNameInTable="NAMA_PEMBUATColumn" msprop:Generator_UserColumnName="NAMA_PEMBUAT" type="xs:string" minOccurs="0" />
+              <xs:element name="JABATAN_PEMBUAT" msprop:Generator_ColumnVarNameInTable="columnJABATAN_PEMBUAT" msprop:Generator_ColumnPropNameInRow="JABATAN_PEMBUAT" msprop:Generator_ColumnPropNameInTable="JABATAN_PEMBUATColumn" msprop:Generator_UserColumnName="JABATAN_PEMBUAT" type="xs:string" minOccurs="0" />
+              <xs:element name="DIPERIKSA_OLEH" msprop:Generator_ColumnVarNameInTable="columnDIPERIKSA_OLEH" msprop:Generator_ColumnPropNameInRow="DIPERIKSA_OLEH" msprop:Generator_ColumnPropNameInTable="DIPERIKSA_OLEHColumn" msprop:Generator_UserColumnName="DIPERIKSA_OLEH" type="xs:string" minOccurs="0" />
+              <xs:element name="JABATAN_PEMERIKSA" msprop:Generator_ColumnVarNameInTable="columnJABATAN_PEMERIKSA" msprop:Generator_ColumnPropNameInRow="JABATAN_PEMERIKSA" msprop:Generator_ColumnPropNameInTable="JABATAN_PEMERIKSAColumn" msprop:Generator_UserColumnName="JABATAN_PEMERIKSA" type="xs:string" minOccurs="0" />
+              <xs:element name="DISETUJUI_OLEH" msprop:Generator_ColumnVarNameInTable="columnDISETUJUI_OLEH" msprop:Generator_ColumnPropNameInRow="DISETUJUI_OLEH" msprop:Generator_ColumnPropNameInTable="DISETUJUI_OLEHColumn" msprop:Generator_UserColumnName="DISETUJUI_OLEH" type="xs:string" minOccurs="0" />
+              <xs:element name="JABATAN_PENYETUJU" msprop:Generator_ColumnVarNameInTable="columnJABATAN_PENYETUJU" msprop:Generator_ColumnPropNameInRow="JABATAN_PENYETUJU" msprop:Generator_ColumnPropNameInTable="JABATAN_PENYETUJUColumn" msprop:Generator_UserColumnName="JABATAN_PENYETUJU" type="xs:string" minOccurs="0" />
+              <xs:element name="DIPERIKSA_ACC1" msprop:Generator_ColumnVarNameInTable="columnDIPERIKSA_ACC1" msprop:Generator_ColumnPropNameInRow="DIPERIKSA_ACC1" msprop:Generator_ColumnPropNameInTable="DIPERIKSA_ACC1Column" msprop:Generator_UserColumnName="DIPERIKSA_ACC1" type="xs:string" minOccurs="0" />
+              <xs:element name="JABATAN_PEMERIKSA_ACC1" msprop:Generator_ColumnVarNameInTable="columnJABATAN_PEMERIKSA_ACC1" msprop:Generator_ColumnPropNameInRow="JABATAN_PEMERIKSA_ACC1" msprop:Generator_ColumnPropNameInTable="JABATAN_PEMERIKSA_ACC1Column" msprop:Generator_UserColumnName="JABATAN_PEMERIKSA_ACC1" type="xs:string" minOccurs="0" />
+              <xs:element name="DIPERIKSA_ACC2" msprop:Generator_ColumnVarNameInTable="columnDIPERIKSA_ACC2" msprop:Generator_ColumnPropNameInRow="DIPERIKSA_ACC2" msprop:Generator_ColumnPropNameInTable="DIPERIKSA_ACC2Column" msprop:Generator_UserColumnName="DIPERIKSA_ACC2" type="xs:string" minOccurs="0" />
+              <xs:element name="JABATAN_PEMERIKSA_ACC2" msprop:Generator_ColumnVarNameInTable="columnJABATAN_PEMERIKSA_ACC2" msprop:Generator_ColumnPropNameInRow="JABATAN_PEMERIKSA_ACC2" msprop:Generator_ColumnPropNameInTable="JABATAN_PEMERIKSA_ACC2Column" msprop:Generator_UserColumnName="JABATAN_PEMERIKSA_ACC2" type="xs:string" minOccurs="0" />
+              <xs:element name="STATUS" msprop:Generator_ColumnVarNameInTable="columnSTATUS" msprop:Generator_ColumnPropNameInRow="STATUS" msprop:Generator_ColumnPropNameInTable="STATUSColumn" msprop:Generator_UserColumnName="STATUS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GAPOK" msprop:Generator_TableClassName="GAPOKDataTable" msprop:Generator_TableVarName="tableGAPOK" msprop:Generator_TablePropName="GAPOK" msprop:Generator_RowDeletingName="GAPOKRowDeleting" msprop:Generator_RowChangingName="GAPOKRowChanging" msprop:Generator_RowEvHandlerName="GAPOKRowChangeEventHandler" msprop:Generator_RowDeletedName="GAPOKRowDeleted" msprop:Generator_UserTableName="GAPOK" msprop:Generator_RowChangedName="GAPOKRowChanged" msprop:Generator_RowEvArgName="GAPOKRowChangeEvent" msprop:Generator_RowClassName="GAPOKRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NPK" msprop:Generator_ColumnVarNameInTable="columnNPK" msprop:Generator_ColumnPropNameInRow="NPK" msprop:Generator_ColumnPropNameInTable="NPKColumn" msprop:Generator_UserColumnName="NPK" type="xs:string" minOccurs="0" />
+              <xs:element name="TANGGAL_BERLAKU" msprop:Generator_ColumnVarNameInTable="columnTANGGAL_BERLAKU" msprop:Generator_ColumnPropNameInRow="TANGGAL_BERLAKU" msprop:Generator_ColumnPropNameInTable="TANGGAL_BERLAKUColumn" msprop:Generator_UserColumnName="TANGGAL_BERLAKU" type="xs:string" minOccurs="0" />
+              <xs:element name="NAMA" msprop:Generator_ColumnVarNameInTable="columnNAMA" msprop:Generator_ColumnPropNameInRow="NAMA" msprop:Generator_ColumnPropNameInTable="NAMAColumn" msprop:Generator_UserColumnName="NAMA" type="xs:string" minOccurs="0" />
+              <xs:element name="JABATAN" msprop:Generator_ColumnVarNameInTable="columnJABATAN" msprop:Generator_ColumnPropNameInRow="JABATAN" msprop:Generator_ColumnPropNameInTable="JABATANColumn" msprop:Generator_UserColumnName="JABATAN" type="xs:string" minOccurs="0" />
+              <xs:element name="DEPARTEMEN" msprop:Generator_ColumnVarNameInTable="columnDEPARTEMEN" msprop:Generator_ColumnPropNameInRow="DEPARTEMEN" msprop:Generator_ColumnPropNameInTable="DEPARTEMENColumn" msprop:Generator_UserColumnName="DEPARTEMEN" type="xs:string" minOccurs="0" />
+              <xs:element name="NILAI" msprop:Generator_ColumnVarNameInTable="columnNILAI" msprop:Generator_ColumnPropNameInRow="NILAI" msprop:Generator_ColumnPropNameInTable="NILAIColumn" msprop:Generator_UserColumnName="NILAI" type="xs:string" minOccurs="0" />
+              <xs:element name="TUNJANGAN" msprop:Generator_ColumnVarNameInTable="columnTUNJANGAN" msprop:Generator_ColumnPropNameInRow="TUNJANGAN" msprop:Generator_ColumnPropNameInTable="TUNJANGANColumn" msprop:Generator_UserColumnName="TUNJANGAN" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
