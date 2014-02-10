@@ -1,11 +1,13 @@
 ﻿Imports Oracle.DataAccess.Client
 Imports Oracle.DataAccess.Types
 Public Class Form1
-    'Dim dt As DataTable
     Public tgl As String
     Public no_urut As String
     Public txtNpk As String
 
+    '============== Otorisasi Gaji
+
+    'Load Nomor Urut dan menampilkan di combobox
     Sub Load_noUrut()
         cmd = New OracleCommand("select no_urut from oto_gaji", con)
         dr = cmd.ExecuteReader
@@ -14,6 +16,7 @@ Public Class Form1
         End While
     End Sub
 
+    'Load tanggal di tabel uhadir dan menampilkan di combobox
     Sub Load_tgl()
         cmd = New OracleCommand("select TO_CHAR(TGL,'fmDD-MON-YYYY') AS TGL from uhadir order by no_urut asc", con)
         dr = cmd.ExecuteReader
@@ -22,6 +25,7 @@ Public Class Form1
         End While
     End Sub
 
+    'Mencetak semua data otorisasi gaji
     Sub cetak_otoGajiAll()
         con.Close()
         da = New OracleDataAdapter("select n_buat as Nama_Pembuat,j_buat as Jabatan_Pembuat," &
@@ -29,29 +33,29 @@ Public Class Form1
                                    "j_setuju as Jabatan_Penyetuju,n_periksa1 as Diperiksa_ACC1,j_periksa1 as Jabatan_Pemeriksa_ACC1," &
                                    "n_periksa2 as Diperiksa_ACC2,j_periksa2 Jabatan_Pemeriksa_ACC2 from oto_gaji", con)
         ds = New DataSet
-        'dt = New DataTable
         da.Fill(ds, "oto_gaji")
         DataGridView2.DataSource = ds.Tables("oto_gaji")
         DataGridView2.ReadOnly = True
 
     End Sub
 
+    'Cetak otorisasi gaji berdasarkan nomor urut
     Sub cetak_otoGaji()
         no_urut = ComboBox2.SelectedItem.ToString()
-        con.Close()
         da = New OracleDataAdapter("select n_buat as Nama_Pembuat,j_buat as Jabatan_Pembuat," &
                                    "n_periksa as Diperiksa_Oleh,j_periksa as Jabatan_pemeriksa,n_setuju as Disetujui_Oleh," &
                                    "j_setuju as Jabatan_Penyetuju,n_periksa1 as Diperiksa_ACC1,j_periksa1 as Jabatan_Pemeriksa_ACC1," &
                                    "n_periksa2 as Diperiksa_ACC2,j_periksa2 Jabatan_Pemeriksa_ACC2 from oto_gaji where no_urut=" + no_urut + "", con)
         ds = New DataSet
         da.Fill(ds, "oto_gaji")
-        'TextBox1.Text = ds.Tables(0).Rows(1).Item(1)
         DataGridView2.DataSource = ds.Tables("oto_gaji")
         DataGridView2.ReadOnly = True
     End Sub
 
+    '================== Tujangan tidak tetap
+
+    'Cetak semua data untuk uhadir
     Sub cetaksemua()
-        con.Close()
         da = New OracleDataAdapter("select TGL,NILAI,STATUS from uhadir", con)
         ds = New DataSet
         da.Fill(ds, "uhadir")
@@ -59,6 +63,7 @@ Public Class Form1
         DataGridView1.ReadOnly = True
     End Sub
 
+    'Cetak data berdasarkan tanggal, kika tgl diinput All, maka tgl diset ke string kosong
     Sub cetaktgl()
         tgl = ComboBox1.SelectedItem.ToString()
         If tgl = "All" Then
@@ -72,15 +77,68 @@ Public Class Form1
         DataGridView1.ReadOnly = True
     End Sub
 
+    '================== Gaji Pokok
+    'Method untuk mencari gaji pokok berdasarkan textbox
+    Sub CariGajiTxt()
+        ComboBox3.Text = "All"
+        txtNpk = TextBox1.Text.ToUpper
+        con.Close()
+        da = New OracleDataAdapter("SELECT A.NPK, C.TGL AS TANGGAL_BERLAKU, A.NAMA,D.N_JABATAN as JABATAN, B.NAMA_DEPARTEMEN AS DEPARTEMEN," &
+                                   " C.NILAI, C.TUNJ_T AS TUNJANGAN FROM ((KARYAWAN A JOIN DEPT B ON A.DEPT=B.ID_DEPARTEMEN)" &
+                                   " JOIN GAPOK C ON A.NPK=C.NPK) JOIN JAB D ON A.JAB=D.ID_JABATAN where A.NAMA like '%" + txtNpk + "%'", con)
+        ds = New DataSet
+        da.Fill(ds, "gapok")
+        DataGridView3.DataSource = ds.Tables("gapok")
+        DataGridView3.ReadOnly = True
+    End Sub
+
+    'Untuk mencari gaji pokok berdasarkan combobox
+    Sub CariGajiComboBox()
+        TextBox1.Text = ""
+        txtNpk = ComboBox3.SelectedItem.ToString()
+        con.Close()
+        If txtNpk = "All" Then
+            da = New OracleDataAdapter("SELECT A.NPK, C.TGL AS TANGGAL_BERLAKU, A.NAMA,D.N_JABATAN as JABATAN, B.NAMA_DEPARTEMEN AS DEPARTEMEN," &
+                                   " C.NILAI, C.TUNJ_T AS TUNJANGAN FROM ((KARYAWAN A JOIN DEPT B ON A.DEPT=B.ID_DEPARTEMEN)" &
+                                   " JOIN GAPOK C ON A.NPK=C.NPK) JOIN JAB D ON A.JAB=D.ID_JABATAN", con)
+            ds = New DataSet
+        Else
+            da = New OracleDataAdapter("SELECT A.NPK, C.TGL AS TANGGAL_BERLAKU, A.NAMA,D.N_JABATAN as JABATAN, B.NAMA_DEPARTEMEN AS DEPARTEMEN," &
+                                   " C.NILAI, C.TUNJ_T AS TUNJANGAN FROM ((KARYAWAN A JOIN DEPT B ON A.DEPT=B.ID_DEPARTEMEN)" &
+                                   " JOIN GAPOK C ON A.NPK=C.NPK) JOIN JAB D ON A.JAB=D.ID_JABATAN where A.NPK like '%" + txtNpk + "%'", con)
+            ds = New DataSet
+        End If
+
+        da.Fill(ds, "gapok")
+        DataGridView3.DataSource = ds.Tables("gapok")
+        DataGridView3.ReadOnly = True
+    End Sub
+
+    'Load NPK ke combobox
+    Sub loadNpk()
+        cmd = New OracleCommand("select npk from gapok where status='ON' order by npk asc", con)
+        dr = cmd.ExecuteReader
+        While dr.Read
+            ComboBox3.Items.Add(dr("npk"))
+        End While
+    End Sub
+
+    '==== FormLoad
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Call koneksi()
         Call cetaksemua()
-        con.Open()
         Call Load_noUrut()
         Call Load_tgl()
         Call loadNpk()
         Call CariGajiTxt()
 
+    End Sub
+
+    '====== Button Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Call koneksi()
+        Form4.Show()
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
@@ -99,29 +157,6 @@ Public Class Form1
                 Form2.Show()
             End If
         End If
-        
-    End Sub
-
-    Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
-        Call koneksi()
-        no_urut = ComboBox2.SelectedItem.ToString()
-
-        If no_urut = "All" Then
-            Call cetak_otoGajiAll()
-        Else
-            Call cetak_otoGaji()
-        End If
-
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
-        Call koneksi()
-        tgl = ComboBox1.SelectedItem.ToString()
-        If tgl = "All" Then
-            Call cetaksemua()
-        Else
-            Call cetaktgl()
-        End If
 
     End Sub
 
@@ -138,61 +173,41 @@ Public Class Form1
         End If
     End Sub
 
-    Sub CariGajiTxt()
-        ComboBox3.Text = "All"
-        txtNpk = TextBox1.Text.ToUpper
-        con.Close()
-        da = New OracleDataAdapter("SELECT A.NPK, C.TGL AS TANGGAL_BERLAKU, A.NAMA,D.N_JABATAN as JABATAN, B.NAMA_DEPARTEMEN AS DEPARTEMEN," &
-                                   " C.NILAI, C.TUNJ_T AS TUNJANGAN FROM ((KARYAWAN A JOIN DEPT B ON A.DEPT=B.ID_DEPARTEMEN)" &
-                                   " JOIN GAPOK C ON A.NPK=C.NPK) JOIN JAB D ON A.JAB=D.ID_JABATAN where A.NAMA like '%" + txtNpk + "%'", con)
-        ds = New DataSet
-        da.Fill(ds, "gapok")
-        DataGridView3.DataSource = ds.Tables("gapok")
-        DataGridView3.ReadOnly = True
-    End Sub
+    '====== Combobox
 
-    Sub CariGajicombo()
-        TextBox1.Text = ""
-        txtNpk = ComboBox3.SelectedItem.ToString()
-        con.Close()
-        If txtNpk = "All" Then
-            da = New OracleDataAdapter("SELECT A.NPK, C.TGL AS TANGGAL_BERLAKU, A.NAMA,D.N_JABATAN as JABATAN, B.NAMA_DEPARTEMEN AS DEPARTEMEN," &
-                                   " C.NILAI, C.TUNJ_T AS TUNJANGAN FROM ((KARYAWAN A JOIN DEPT B ON A.DEPT=B.ID_DEPARTEMEN)" &
-                                   " JOIN GAPOK C ON A.NPK=C.NPK) JOIN JAB D ON A.JAB=D.ID_JABATAN", con)
-            ds = New DataSet
-        Else
-            da = New OracleDataAdapter("SELECT A.NPK, C.TGL AS TANGGAL_BERLAKU, A.NAMA,D.N_JABATAN as JABATAN, B.NAMA_DEPARTEMEN AS DEPARTEMEN," &
-                                   " C.NILAI, C.TUNJ_T AS TUNJANGAN FROM ((KARYAWAN A JOIN DEPT B ON A.DEPT=B.ID_DEPARTEMEN)" &
-                                   " JOIN GAPOK C ON A.NPK=C.NPK) JOIN JAB D ON A.JAB=D.ID_JABATAN where A.NPK like '%" + txtNpk + "%'", con)
-            ds = New DataSet
-        End If
-        
-        da.Fill(ds, "gapok")
-        DataGridView3.DataSource = ds.Tables("gapok")
-        DataGridView3.ReadOnly = True
-    End Sub
-
-    Sub loadNpk()
-        cmd = New OracleCommand("select npk from gapok where status='ON' order by npk asc", con)
-        dr = cmd.ExecuteReader
-        While dr.Read
-            ComboBox3.Items.Add(dr("npk"))
-        End While
-    End Sub
-
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         Call koneksi()
-        Call CariGajiTxt()
+        tgl = ComboBox1.SelectedItem.ToString()
+        If tgl = "All" Then
+            Call cetaksemua()
+        Else
+            Call cetaktgl()
+        End If
+
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
+        Call koneksi()
+        no_urut = ComboBox2.SelectedItem.ToString()
+
+        If no_urut = "All" Then
+            Call cetak_otoGajiAll()
+        Else
+            Call cetak_otoGaji()
+        End If
+
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox3.SelectedIndexChanged
         Call koneksi()
-        Call CariGajicombo()
+        Call CariGajiComboBox()
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    '===== Textbox change
+
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
         Call koneksi()
-        Form4.Show()
+        Call CariGajiTxt()
     End Sub
 
 End Class
